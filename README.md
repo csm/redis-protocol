@@ -9,6 +9,11 @@ Available on clojars:
 * [com.github.csm.redis/netty4](https://clojars.org/com.github.csm.redis/netty4)
 * [com.github.csm.redis/netty4-server](https://clojars.org/com.github.csm.redis/netty4-server)
 
+The general idea is to make redis available for use within testing code, without resorting to forking off `redis-server`
+or having it running already.
+
+Original README contents below:
+
 ```
 A very fast Redis client for the JVM.
 
