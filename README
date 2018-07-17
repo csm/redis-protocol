@@ -1,3 +1,8 @@
+Note, this has been hacked up to support a newer version of netty 4,
+but only the netty4-server and related projects.
+
+
+
 A very fast Redis client for the JVM.
 
 Description of each module:
@@ -39,7 +44,7 @@ In the experiments branch you can find:
 Maven dependency:
 
     <dependency>
-      <groupId>com.github.spullara.redis</groupId>
+      <groupId>com.github.csm.redis</groupId>
       <artifactId>client</artifactId>
       <version>0.6</version>
     </dependency>

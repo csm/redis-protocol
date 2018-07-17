@@ -2,12 +2,12 @@ package redis.netty4;
 
 import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufIndexFinder;
-import io.netty.buffer.MessageBuf;
+import io.netty.buffer.ByteBufProcessor;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ReplayingDecoder;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Netty codec for Redis
@@ -81,12 +81,13 @@ public class RedisReplyDecoder extends ReplayingDecoder<Void> {
     int code = is.readByte();
     switch (code) {
       case StatusReply.MARKER: {
-        String status = is.readBytes(is.bytesBefore(ByteBufIndexFinder.CRLF)).toString(Charsets.UTF_8);
+        String status = is.readBytes(is.forEachByte(ByteBufProcessor.FIND_CRLF) - is.readerIndex()).toString(Charsets.UTF_8);
         is.skipBytes(2);
         return new StatusReply(status);
       }
       case ErrorReply.MARKER: {
-        String error = is.readBytes(is.bytesBefore(ByteBufIndexFinder.CRLF)).toString(Charsets.UTF_8);
+        System.out.printf("reading status buffer: %s, crlf: %d", is, is.forEachByte(ByteBufProcessor.FIND_CRLF));
+        String error = is.readBytes(is.forEachByte(ByteBufProcessor.FIND_CRLF) - is.readerIndex()).toString(Charsets.UTF_8);
         is.skipBytes(2);
         return new ErrorReply(error);
       }
@@ -130,13 +131,13 @@ public class RedisReplyDecoder extends ReplayingDecoder<Void> {
    * {@link io.netty.buffer.ByteBuf} has nothing to read anymore, till nothing was read from the input {@link io.netty.buffer.ByteBuf} or till
    * this method returns {@code null}.
    *
-   * @param ctx the {@link io.netty.channel.ChannelHandlerContext} which this {@link io.netty.handler.codec.ByteToByteDecoder} belongs to
+   * @param ctx the {@link io.netty.channel.ChannelHandlerContext} which this decoder belongs to
    * @param in  the {@link io.netty.buffer.ByteBuf} from which to read data
-   * @param out the {@link io.netty.buffer.MessageBuf} to which decoded messages should be added
+   * @param out the {@link java.util.List} to which decoded messages should be added
    * @throws Exception is thrown if an error accour
    */
   @Override
-  protected void decode(ChannelHandlerContext ctx, ByteBuf in, MessageBuf<Object> out) throws Exception {
+  protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
     out.add(receive(in));
   }
 }

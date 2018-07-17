@@ -1,10 +1,9 @@
 package redis.server.netty;
 
 import com.google.common.base.Charsets;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundMessageHandlerAdapter;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import redis.netty4.Command;
 import redis.netty4.ErrorReply;
 import redis.netty4.InlineReply;
@@ -23,7 +22,7 @@ import static redis.netty4.StatusReply.QUIT;
  * Handle decoded commands
  */
 @ChannelHandler.Sharable
-public class RedisCommandHandler extends ChannelInboundMessageHandlerAdapter<Command> {
+public class RedisCommandHandler extends ChannelInboundHandlerAdapter {
 
   private Map<BytesKey, Wrapper> methods = new HashMap<BytesKey, Wrapper>();
 
@@ -61,12 +60,14 @@ public class RedisCommandHandler extends ChannelInboundMessageHandlerAdapter<Com
   private static final byte LOWER_DIFF = 'a' - 'A';
 
   @Override
-  public void endMessageReceived(ChannelHandlerContext ctx) throws Exception {
+  public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
     ctx.flush();
+    super.channelReadComplete(ctx);
   }
 
   @Override
-  public void messageReceived(ChannelHandlerContext ctx, Command msg) throws Exception {
+  public void channelRead(ChannelHandlerContext ctx, Object _msg) throws Exception {
+    Command msg = (Command) _msg;
     byte[] name = msg.getName();
     for (int i = 0; i < name.length; i++) {
       byte b = name[i];
@@ -94,7 +95,7 @@ public class RedisCommandHandler extends ChannelInboundMessageHandlerAdapter<Com
       if (reply == null) {
         reply = NYI_REPLY;
       }
-      ctx.nextOutboundMessageBuffer().add(reply);
+      ctx.write(reply);
     }
   }
 }

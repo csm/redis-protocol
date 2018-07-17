@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>redis</artifactId>
-    <groupId>com.github.spullara.redis</groupId>
+    <groupId>com.github.csm.redis</groupId>
     <version>0.7</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.spullara.redis</groupId>
+  <groupId>com.github.csm.redis</groupId>
   <artifactId>netty-client</artifactId>
   <version>0.7</version>
   <packaging>jar</packaging>
@@ -20,7 +20,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.github.spullara.redis</groupId>
+      <groupId>com.github.csm.redis</groupId>
       <artifactId>netty</artifactId>
       <version>0.7</version>
     </dependency>

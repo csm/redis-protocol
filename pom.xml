@@ -1,19 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.spullara.redis</groupId>
+  <groupId>com.github.csm.redis</groupId>
   <artifactId>redis</artifactId>
-  <version>0.7</version>
+  <version>0.7.1</version>
   <modules>
     <module>util</module>
     <module>protocol</module>
-    <module>client</module>
-    <module>redisgen</module>
-    <module>benchmark</module>
-    <module>netty</module>
-    <module>netty-client</module>
     <module>netty4</module>
-    <module>netty4-client</module>
     <module>netty4-server</module>
   </modules>
   <packaging>pom</packaging>
@@ -51,19 +45,19 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git@github.com:spullara/redis-protocol.git</connection>
-    <developerConnection>scm:git:git@github.com:spullara/redis-protocol.git</developerConnection>
-    <url>scm:git:git@github.com:spullara/redis-protocol.git</url>
+    <connection>scm:git:git@github.com:csm/redis-protocol.git</connection>
+    <developerConnection>scm:git:git@github.com:csm/redis-protocol.git</developerConnection>
+    <url>scm:git:git@github.com:csm/redis-protocol.git</url>
   </scm>
 
   <distributionManagement>
     <repository>
-      <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+      <id>clojars</id>
+      <url>https://repo.clojars.org</url>
     </repository>
     <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>clojars-snapshots</id>
+      <url>https://repo.clojars.org</url>
     </snapshotRepository>
   </distributionManagement>
 
