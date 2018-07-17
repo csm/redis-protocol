@@ -1,8 +1,15 @@
 Note, this has been hacked up to support a newer version of netty 4,
 but only the netty4-server and related projects.
 
+Available on clojars:
 
+* [com.github.csm.redis/redis](https://clojars.org/com.github.csm.redis/redis)
+* [com.github.csm.redis/util](https://clojars.org/com.github.csm.redis/util)
+* [com.github.csm.redis/protocol](https://clojars.org/com.github.csm.redis/protocol)
+* [com.github.csm.redis/netty4](https://clojars.org/com.github.csm.redis/netty4)
+* [com.github.csm.redis/netty4-server](https://clojars.org/com.github.csm.redis/netty4-server)
 
+```
 A very fast Redis client for the JVM.
 
 Description of each module:
@@ -109,3 +116,4 @@ Copyright 2012 Sam Pullara
    See the License for the specific language governing permissions and
    limitations under the License.
 
+```
